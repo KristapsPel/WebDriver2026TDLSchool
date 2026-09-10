@@ -57,6 +57,20 @@ public class NavigationTest {
         //driver.quit();
     }
 
+    @Test(testName = "TDL School navigation FireFox WDM",
+            description = "We check navigation on TDL School homepage with Firefox WDM")
+    public void openTDLSchoolHomepageFirefoxWDM() {
+        WebDriverManager.firefoxdriver().setup();
+
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        driver.get("https://tdlschool.com/");
+        System.out.println("Title:" + driver.getTitle());
+        System.out.println("Current URL:" + driver.getCurrentUrl());
+        driver.close();
+        //driver.quit();
+    }
+
 
     @Test(testName = "TDL School navigation with WDM",
             description = "We check navigation on TDL School homepage with WDM")
