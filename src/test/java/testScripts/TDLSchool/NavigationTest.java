@@ -19,17 +19,57 @@ public class NavigationTest {
 //    Close browser Done
 //    Quit driver Done
 
+    private WebDriver setUpWebDriverWithWDM(String browser){
+        WebDriver driver = null;
+        switch (browser){
+            case "CHROME":
+                WebDriverManager.chromedriver().setup();
+                driver = new ChromeDriver();
+                break;
+            case "FIREFOX":
+                WebDriverManager.firefoxdriver().setup();
+                driver = new FirefoxDriver();
+                break;
+            default:
+                System.out.println(browser+" not supported!");
+                break;
+        }
+        return driver;
+    }
+
+    private WebDriver setUpWebDriver(String browser){
+        WebDriver driver = null;
+        switch (browser){
+            case "CHROME":
+                System.setProperty("webdriver.chrome.driver",
+                        "src" + File.separator +
+                                "test" + File.separator +
+                                "resources" + File.separator +
+                                "drivers" + File.separator +
+                                "chromedriver.exe");
+
+                driver = new ChromeDriver();
+                break;
+            case "FIREFOX":
+                System.setProperty("webdriver.gecko.driver",
+                        "src" + File.separator +
+                                "test" + File.separator +
+                                "resources" + File.separator +
+                                "drivers" + File.separator +
+                                "geckodriver.exe");
+                driver = new FirefoxDriver();
+                break;
+            default:
+                System.out.println(browser+" not supported!");
+                break;
+        }
+        return driver;
+    }
+
     @Test(testName = "TDL School navigation",
             description = "We check navigation on TDL School homepage")
     public void openTDLSchoolHomepage() {
-        System.setProperty("webdriver.chrome.driver",
-                "src" + File.separator +
-                        "test" + File.separator +
-                        "resources" + File.separator +
-                        "drivers" + File.separator +
-                        "chromedriver.exe");
-
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = setUpWebDriver("CHROME");
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
         System.out.println("Title:" + driver.getTitle());
@@ -41,14 +81,7 @@ public class NavigationTest {
     @Test(testName = "TDL School navigation FireFox",
             description = "We check navigation on TDL School homepage with Firefox")
     public void openTDLSchoolHomepageFirefox() {
-        System.setProperty("webdriver.gecko.driver",
-                "src" + File.separator +
-                        "test" + File.separator +
-                        "resources" + File.separator +
-                        "drivers" + File.separator +
-                        "geckodriver.exe");
-
-        WebDriver driver = new FirefoxDriver();
+        WebDriver driver = setUpWebDriver("FIREFOX");
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
         System.out.println("Title:" + driver.getTitle());
@@ -60,9 +93,7 @@ public class NavigationTest {
     @Test(testName = "TDL School navigation FireFox WDM",
             description = "We check navigation on TDL School homepage with Firefox WDM")
     public void openTDLSchoolHomepageFirefoxWDM() {
-        WebDriverManager.firefoxdriver().setup();
-
-        WebDriver driver = new FirefoxDriver();
+        WebDriver driver=setUpWebDriverWithWDM("FIREFOX");
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
         System.out.println("Title:" + driver.getTitle());
@@ -75,9 +106,7 @@ public class NavigationTest {
     @Test(testName = "TDL School navigation with WDM",
             description = "We check navigation on TDL School homepage with WDM")
     public void openTDLSchoolHomepageWithWDM() {
-        WebDriverManager.chromedriver().setup();
-
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver=setUpWebDriverWithWDM("CHROME");
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
         System.out.println("Title:" + driver.getTitle());
