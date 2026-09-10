@@ -3,6 +3,7 @@ package testScripts.TDLSchool;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -35,6 +36,25 @@ public class NavigationTest {
         System.out.println("Current URL:" + driver.getCurrentUrl());
         driver.close();
         driver.quit();
+    }
+
+    @Test(testName = "TDL School navigation FireFox",
+            description = "We check navigation on TDL School homepage with Firefox")
+    public void openTDLSchoolHomepageFirefox() {
+        System.setProperty("webdriver.gecko.driver",
+                "src" + File.separator +
+                        "test" + File.separator +
+                        "resources" + File.separator +
+                        "drivers" + File.separator +
+                        "geckodriver.exe");
+
+        WebDriver driver = new FirefoxDriver();
+        driver.manage().window().maximize();
+        driver.get("https://tdlschool.com/");
+        System.out.println("Title:" + driver.getTitle());
+        System.out.println("Current URL:" + driver.getCurrentUrl());
+        driver.close();
+        //driver.quit();
     }
 
 
