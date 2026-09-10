@@ -23,7 +23,7 @@ public class NavigationTest {
     public void openTDLSchoolHomepage() {
         System.setProperty("webdriver.chrome.driver",
                 "src" + File.separator +
-                        "tests" + File.separator +
+                        "test" + File.separator +
                         "resources" + File.separator +
                         "drivers" + File.separator +
                         "chromedriver.exe");
