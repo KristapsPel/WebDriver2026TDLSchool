@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 
 public class NavigationTest {
 //    Create new project Web Automation Practice Done
@@ -77,6 +78,15 @@ public class NavigationTest {
         driver = setUpWebDriver("CHROME");
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Check if TDL School logo is Displayed");
+        WebElement tdlSchoolLogoImg = driver.findElement(By.className("navigation__logo"));
+        boolean isDisplayed = tdlSchoolLogoImg.isDisplayed();
+        Assert.assertTrue(isDisplayed, "TDL School Logo is not Displayed ");
     }
 
     @AfterMethod
@@ -101,15 +111,6 @@ public class NavigationTest {
 
     @Test(testName = "TDL School navigation test")
     public void navigationTest(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("Check if TDL School logo is Displayed");
-        WebElement tdlSchoolLogoImg = driver.findElement(By.className("navigation__logo"));
-        boolean isDisplayed = tdlSchoolLogoImg.isDisplayed();
-        Assert.assertTrue(isDisplayed, "TDL School Logo is not Displayed ");
 
         System.out.println("Click on Career Paths");
         driver.findElement(By.linkText("Career Paths")).click();
@@ -123,4 +124,16 @@ public class NavigationTest {
         System.out.println("Enter text test");
         inputEmailField.sendKeys("test");
     }
+
+//    Use previously created Webdriver project
+//    Open page: https://tdlschool.com/
+//    Check if TDL School logo is Displayed
+//    Check that 4 courses is displayed in Upcoming section
+    @Test
+    public void checkCoursesCount(){
+        List<WebElement> visibleUpcomingCourses=
+                driver.findElements(By.cssSelector("a.course-suggestions__course-card--active>div.cover-photo"));
+        Assert.assertEquals(visibleUpcomingCourses.size(), 4, "There not 4 elements visible");
+    }
+
 }
