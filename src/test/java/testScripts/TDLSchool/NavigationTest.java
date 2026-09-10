@@ -1,5 +1,6 @@
 package testScripts.TDLSchool;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
@@ -22,7 +23,7 @@ public class NavigationTest {
     public void openTDLSchoolHomepage() {
         System.setProperty("webdriver.chrome.driver",
                 "src" + File.separator +
-                        "test" + File.separator +
+                        "tests" + File.separator +
                         "resources" + File.separator +
                         "drivers" + File.separator +
                         "chromedriver.exe");
@@ -30,8 +31,23 @@ public class NavigationTest {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://tdlschool.com/");
-        System.out.println("Title:"+driver.getTitle());
-        System.out.println("Current URL:"+driver.getCurrentUrl());
+        System.out.println("Title:" + driver.getTitle());
+        System.out.println("Current URL:" + driver.getCurrentUrl());
+        driver.close();
+        driver.quit();
+    }
+
+
+    @Test(testName = "TDL School navigation with WDM",
+            description = "We check navigation on TDL School homepage with WDM")
+    public void openTDLSchoolHomepageWithWDM() {
+        WebDriverManager.chromedriver().setup();
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://tdlschool.com/");
+        System.out.println("Title:" + driver.getTitle());
+        System.out.println("Current URL:" + driver.getCurrentUrl());
         driver.close();
         driver.quit();
     }
