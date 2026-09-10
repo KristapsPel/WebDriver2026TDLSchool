@@ -14,8 +14,8 @@ public class NavigationTest {
 //    Maximize windows size Done
 //    Open page: https://tdlschool.com/ Done
 //    Print out : Title and Current url Done
-//    Close browser
-//    Quit driver
+//    Close browser Done
+//    Quit driver Done
 
     @Test(testName = "TDL School navigation",
             description = "We check navigation on TDL School homepage")
