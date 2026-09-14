@@ -65,8 +65,20 @@ public class NavigationTest extends BasePage {
     @Test
     public void checkCoursesCount() {
         HomePage homePage = new HomePage(driver);
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(
+                System.getProperty("user.dir") + File.separator +
+                        "report" + File.separator +
+                        "TestReport2.html");
 
+        ExtentReports extentReports = new ExtentReports();
+        extentReports.attachReporter(sparkReporter);
+
+        ExtentTest extentTest = extentReports.createTest("Check upcoming lectures");
+        extentTest.log(Status.INFO, "Check that 4 elements are visible inside upcoming lectures");
         homePage.validateUpcomingCourseCount(4);
+        extentTest.log(Status.PASS, "Upcoming lecture shows correct amount of courses");
+
+        extentReports.flush();
     }
 
     public void addScreenshotToReport(Status status, ExtentTest test) {
