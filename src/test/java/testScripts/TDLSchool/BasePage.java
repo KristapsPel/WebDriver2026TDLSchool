@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HeaderPage;
+import utils.ConfigFileReader;
 import utils.WebDriverHelper;
 
 import java.io.File;
@@ -18,6 +19,7 @@ import static utils.ExtentReportHelper.*;
 public class BasePage {
     protected WebDriver driver;
     public ExtentTest extentTest;
+    private ConfigFileReader configFileReader;
 
     @BeforeSuite
     public void createReport() {
@@ -28,12 +30,16 @@ public class BasePage {
     public void generateReport() {
         generateHTMLReportFile();
     }
+    @BeforeClass
+    public void readProperties(){
+        configFileReader = new ConfigFileReader("TDLSchool.properties");
+    }
 
     @BeforeMethod
     public void setUpBrowser(Method method) {
         extentTest = createTest(method.getAnnotation(Test.class).testName(),
                 method.getAnnotation(Test.class).description());
-        driver = WebDriverHelper.setUpDriver( "https://tdlschool.com/", "CHROME");
+        driver = WebDriverHelper.setUpDriver(configFileReader.getUrl(), configFileReader.getBrowser());
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
