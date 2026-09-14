@@ -25,8 +25,8 @@ public class NavigationTest extends BasePage {
     @Test(testName = "TDL School navigation",
             description = "We check navigation on TDL School homepage")
     public void openTDLSchoolHomepage() {
-        System.out.println("Title:" + driver.getTitle());
-        System.out.println("Current URL:" + driver.getCurrentUrl());
+        extentTest.log(Status.INFO, "Title:" + driver.getTitle());
+        extentTest.log(Status.INFO, "Current URL:" + driver.getCurrentUrl());
     }
 
 
