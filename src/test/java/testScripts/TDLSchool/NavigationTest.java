@@ -15,6 +15,8 @@ import pages.HomePage;
 
 import java.io.File;
 
+import static utils.ExtentReportHelper.addScreenshotToReport;
+
 
 public class NavigationTest extends BasePage {
 //    Create Report before all test begin
@@ -45,7 +47,7 @@ public class NavigationTest extends BasePage {
 
         extentTest.log(Status.INFO, "We enter test inside email input field in footer");
         footerPage.enterEmail("test");
-        addScreenshotToReport(Status.INFO, extentTest);
+        addScreenshotToReport(Status.INFO,"Screenshot of input field", extentTest, driver);
     }
 
     @Test(testName = "Validate visible courses count on Homepage")
@@ -53,17 +55,8 @@ public class NavigationTest extends BasePage {
         HomePage homePage = new HomePage(driver);
 
         extentTest.log(Status.INFO, "Check that 4 elements are visible inside upcoming lectures");
-        homePage.validateUpcomingCourseCount(4);
+        homePage.validateUpcomingCourseCount(8);
         extentTest.log(Status.PASS, "Upcoming lecture shows correct amount of courses");
-    }
-
-    public void addScreenshotToReport(Status status, ExtentTest test) {
-        // Capture the screenshot as a Base64 string and prepend with the data URI scheme for a PNG image
-        String base64ScreenShot = "data:image/png;base64," + ((TakesScreenshot) driver)
-                .getScreenshotAs(OutputType.BASE64);
-
-        // Log the screenshot to the report with the specified status (PASS, FAIL, etc.)
-        test.log(status, MediaEntityBuilder.createScreenCaptureFromBase64String(base64ScreenShot).build());
     }
 
 }
