@@ -34,29 +34,21 @@ public class NavigationTest extends BasePage {
 
     @Test(testName = "TDL School navigation test")
     public void navigationTest() {
-        HeaderPage headerPage = new HeaderPage(driver);
-        CareerPage careerPage = new CareerPage(driver);
-        FooterPage footerPage = new FooterPage(driver);
+        HeaderPage headerPage = new HeaderPage(driver ,extentTest);
+        CareerPage careerPage = new CareerPage(driver, extentTest);
+        FooterPage footerPage = new FooterPage(driver, extentTest);
 
-        extentTest.log(Status.INFO, "Click on Career Paths button");
         headerPage.clickCareerPaths();
-
-        extentTest.log(Status.INFO, "We check if Not sure where to start? title is visible");
         careerPage.validateTitleValue("Not sure where to start?");
-        extentTest.log(Status.PASS, "Title is correct");
-
-        extentTest.log(Status.INFO, "We enter test inside email input field in footer");
         footerPage.enterEmail("test");
         addScreenshotToReport(Status.INFO,"Screenshot of input field", extentTest, driver);
     }
 
     @Test(testName = "Validate visible courses count on Homepage")
     public void checkCoursesCount() {
-        HomePage homePage = new HomePage(driver);
+        HomePage homePage = new HomePage(driver, extentTest);
 
-        extentTest.log(Status.INFO, "Check that 4 elements are visible inside upcoming lectures");
         homePage.validateUpcomingCourseCount(8);
-        extentTest.log(Status.PASS, "Upcoming lecture shows correct amount of courses");
     }
 
 }

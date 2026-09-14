@@ -1,5 +1,7 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,18 +15,22 @@ public class HeaderPage {
     @FindBy(linkText = "Career Paths")
     private WebElement careerPathLink;
 
+    private ExtentTest extentTest;
 
-    public HeaderPage(WebDriver driver) {
+
+    public HeaderPage(WebDriver driver, ExtentTest extentTest) {
         PageFactory.initElements(driver, this);
+        this.extentTest = extentTest;
     }
 
     public void checkIfLogoIsDisplayed() {
-        System.out.println("Check if TDL School logo is Displayed");
+        extentTest.log(Status.INFO, "Check if TDL School logo is Displayed");
         Assert.assertTrue(logo.isDisplayed(), "TDL School Logo is not Displayed ");
+        extentTest.log(Status.PASS, "TDL School logo is displayed");
     }
 
     public void clickCareerPaths() {
-        System.out.println("Click on Career Paths");
+        extentTest.log(Status.INFO,"Click on Career Paths");
         careerPathLink.click();
     }
 }

@@ -1,5 +1,7 @@
 package pages;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,12 +13,15 @@ public class FooterPage {
     @FindBy(name = "email")
     private WebElement emailInput;
 
-    public FooterPage(WebDriver driver) {
+    private ExtentTest extentTest;
+
+    public FooterPage(WebDriver driver, ExtentTest extentTest) {
         PageFactory.initElements(driver, this);
+        this.extentTest = extentTest;
     }
 
     public void enterEmail(String email) {
-        System.out.println("Enter “"+email+"” in footer input field email");
+        extentTest.log(Status.INFO,"Enter “"+email+"” in footer input field email");
         emailInput.sendKeys(email);
     }
 }

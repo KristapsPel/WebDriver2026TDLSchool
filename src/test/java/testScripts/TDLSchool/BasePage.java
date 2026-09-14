@@ -33,15 +33,13 @@ public class BasePage {
     public void setUpBrowser(Method method) {
         extentTest = createTest(method.getAnnotation(Test.class).testName(),
                 method.getAnnotation(Test.class).description());
-        driver = WebDriverHelper.setUpDriverWithWDM("CHROME");
-        driver.manage().window().maximize();
-        driver.get("https://tdlschool.com/");
+        driver = WebDriverHelper.setUpDriver( "https://tdlschool.com/", "CHROME");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        HeaderPage headerPage = new HeaderPage(driver);
+        HeaderPage headerPage = new HeaderPage(driver, extentTest);
         headerPage.checkIfLogoIsDisplayed();
     }
 

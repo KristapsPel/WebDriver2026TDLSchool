@@ -55,4 +55,11 @@ public class WebDriverHelper {
         }
         return driver;
     }
+
+    public static WebDriver setUpDriver(String url, String browser){
+        WebDriver driver = WebDriverHelper.setUpDriverWithWDM(browser);
+        driver.manage().window().maximize();
+        driver.get(url);
+        return driver;
+    }
 }
