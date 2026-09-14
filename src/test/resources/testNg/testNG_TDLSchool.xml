@@ -1,0 +1,8 @@
+<suite name="TDL School test suite">
+    <test name="Basic TDL School tests">
+        <parameter name="configFile" value="TDLSchool.properties"/>
+        <classes>
+            <class name="testScripts.TDLSchool.NavigationTest"/>
+        </classes>
+    </test>
+</suite>

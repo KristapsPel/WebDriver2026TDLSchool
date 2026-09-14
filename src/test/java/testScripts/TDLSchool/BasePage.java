@@ -31,14 +31,16 @@ public class BasePage {
         generateHTMLReportFile();
     }
     @BeforeClass
-    public void readProperties(){
-        configFileReader = new ConfigFileReader("TDLSchool.properties");
+    @Parameters("configFile")
+    public void readProperties(String configFile){
+        configFileReader = new ConfigFileReader(configFile);
     }
 
     @BeforeMethod
     public void setUpBrowser(Method method) {
         extentTest = createTest(method.getAnnotation(Test.class).testName(),
                 method.getAnnotation(Test.class).description());
+        extentTest.assignAuthor(configFileReader.getValueFromProperties("author"));
         driver = WebDriverHelper.setUpDriver(configFileReader.getUrl(), configFileReader.getBrowser());
         try {
             Thread.sleep(5000);
