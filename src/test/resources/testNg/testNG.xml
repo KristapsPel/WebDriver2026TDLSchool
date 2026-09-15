@@ -1,0 +1,14 @@
+<suite name="All test for TDL School Practice">
+    <test name="Basic TDL School tests">
+        <parameter name="configFile" value="TDLSchool.properties"/>
+        <classes>
+            <class name="testScripts.TDLSchool.NavigationTest"/>
+        </classes>
+    </test>
+    <test name="Registration test for Automation Practice">
+        <parameter name="configFile" value="AutomationPractice.properties"/>
+        <classes>
+            <class name="testScripts.AutomationPractice.RegistrationTest"/>
+        </classes>
+    </test>
+</suite>

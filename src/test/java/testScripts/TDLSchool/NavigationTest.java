@@ -1,19 +1,12 @@
 package testScripts.TDLSchool;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.Test;
-import pages.CareerPage;
-import pages.FooterPage;
-import pages.HeaderPage;
-import pages.HomePage;
-
-import java.io.File;
+import pages.TDLSchool.CareerPage;
+import pages.TDLSchool.FooterPage;
+import pages.TDLSchool.HeaderPage;
+import pages.TDLSchool.HomePage;
+import testScripts.BasePage;
 
 import static utils.ExtentReportHelper.addScreenshotToReport;
 
@@ -27,6 +20,9 @@ public class NavigationTest extends BasePage {
     @Test(testName = "TDL School navigation",
             description = "We check navigation on TDL School homepage")
     public void openTDLSchoolHomepage() {
+        HeaderPage headerPage = new HeaderPage(driver, extentTest);
+        headerPage.checkIfLogoIsDisplayed();
+
         extentTest.log(Status.INFO, "Title:" + driver.getTitle());
         extentTest.log(Status.INFO, "Current URL:" + driver.getCurrentUrl());
     }
@@ -38,6 +34,7 @@ public class NavigationTest extends BasePage {
         CareerPage careerPage = new CareerPage(driver, extentTest);
         FooterPage footerPage = new FooterPage(driver, extentTest);
 
+        headerPage.checkIfLogoIsDisplayed();
         headerPage.clickCareerPaths();
         careerPage.validateTitleValue("Not sure where to start?");
         footerPage.enterEmail("test");
@@ -47,7 +44,9 @@ public class NavigationTest extends BasePage {
     @Test(testName = "Validate visible courses count on Homepage")
     public void checkCoursesCount() {
         HomePage homePage = new HomePage(driver, extentTest);
+        HeaderPage headerPage = new HeaderPage(driver, extentTest);
 
+        headerPage.checkIfLogoIsDisplayed();
         homePage.validateUpcomingCourseCount(8);
     }
 

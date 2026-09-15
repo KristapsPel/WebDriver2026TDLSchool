@@ -1,17 +1,13 @@
-package testScripts.TDLSchool;
+package testScripts;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.HeaderPage;
 import utils.ConfigFileReader;
 import utils.WebDriverHelper;
 
-import java.io.File;
 import java.lang.reflect.Method;
 
 import static utils.ExtentReportHelper.*;
@@ -47,8 +43,6 @@ public class BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        HeaderPage headerPage = new HeaderPage(driver, extentTest);
-        headerPage.checkIfLogoIsDisplayed();
     }
 
     @AfterMethod
