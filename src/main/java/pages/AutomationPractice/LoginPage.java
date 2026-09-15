@@ -8,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class LoginPage {
 
     @FindBy(name = "name")
@@ -26,11 +29,14 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    private void enterEmail(String email){
+    private void enterEmail(String email) {
+        LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String currentTime = time.format(formatter);
         Assert.assertTrue(emailInput.isDisplayed(), "Email field is not Displayed");
         extentTest.log(Status.PASS, "Email field is visible");
         extentTest.log(Status.INFO, "Enter email in Sign Up filed");
-        emailInput.sendKeys(email);
+        emailInput.sendKeys(currentTime + email);
     }
 
     private void enterName(String name) {
@@ -40,14 +46,14 @@ public class LoginPage {
         nameInput.sendKeys(name);
     }
 
-    private void clickSignUpButton(){
+    private void clickSignUpButton() {
         Assert.assertTrue(signUpButton.isDisplayed(), "Sign Up button is not Displayed");
         extentTest.log(Status.PASS, "Sign up button is visible");
         extentTest.log(Status.INFO, "Click on Sign Up button");
         signUpButton.click();
     }
 
-    public void enterSignUpForm(String email, String name){
+    public void enterSignUpForm(String email, String name) {
         enterName(name);
         enterEmail(email);
         clickSignUpButton();
