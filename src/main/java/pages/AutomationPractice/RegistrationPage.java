@@ -113,6 +113,12 @@ public class RegistrationPage {
         extentTest.log(Status.INFO, "Enter "+address+" in last Name field");
         addressInput.sendKeys(address);
     }
+    private void selectCountry(String country){
+        Select selectCountryDropdown = new Select(selectCountry);
+        selectCountryDropdown.selectByVisibleText(country);
+        extentTest.log(Status.PASS, "Select country:"+country);
+
+    }
     private void enterState(String state) {
         Assert.assertTrue(stateInput.isDisplayed(), "State field is not visible.");
         extentTest.log(Status.PASS, "State field is present");
@@ -143,5 +149,22 @@ public class RegistrationPage {
         extentTest.log(Status.PASS, "Create account button is present");
         extentTest.log(Status.INFO, "Click on Create account");
         createAccountButton.click();
+    }
+
+    public void fillTheRegistrationFrom (String title, String password, String day, String month, String year,
+                                         String firstName, String lastName, String address,String country, String state,
+                                         String city, String zipCode, String phoneNumber){
+        selectTitle(title);
+        enterPassword(password);
+        selectDate(day, month, year);
+        enterFirstName(firstName);
+        enterLastName(lastName);
+        enterAddress(address);
+        selectCountry(country);
+        enterState(state);
+        enterCity(city);
+        enterZipCode(zipCode);
+        enterPhoneNumber(phoneNumber);
+        clickCreateAccount();
     }
 }
