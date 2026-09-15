@@ -12,6 +12,9 @@ public class HeaderComponent {
     @FindBy(className = "fa-lock")
     private WebElement signUpButton;
 
+    @FindBy(css="button[aria-label='Consent']")
+    private WebElement consent;
+
     private ExtentTest extentTest;
 
     public HeaderComponent(WebDriver driver, ExtentTest extentTest) {
@@ -24,5 +27,10 @@ public class HeaderComponent {
         extentTest.log(Status.PASS, "Sign up button is visible");
         extentTest.log(Status.INFO, "Click on Sign Up");
         signUpButton.click();
+    }
+
+    public void clickConsent(){
+        extentTest.log(Status.INFO, "Click on Consent is cookies popup");
+        consent.click();
     }
 }

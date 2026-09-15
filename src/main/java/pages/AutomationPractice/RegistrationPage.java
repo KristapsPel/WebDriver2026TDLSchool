@@ -64,7 +64,7 @@ public class RegistrationPage {
     private void selectTitle(String title) {
         boolean isFound = false;
         for (WebElement selectOption: radioTitleButtons) {
-            if (selectOption.getAttribute("value")==title){
+            if (selectOption.getAttribute("value").equals(title)){
                 selectOption.click();
                 extentTest.log(Status.PASS, "Select title:"+title);
                 isFound = true;

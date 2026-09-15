@@ -19,22 +19,23 @@ public class RegistrationTest extends BasePage {
         RegistrationPage registrationPage = new RegistrationPage(driver, extentTest);
         AccountCreatedPage accountCreatedPage = new AccountCreatedPage(driver, extentTest);
 
+        header.clickConsent();
         header.clickOnSignUpButton();
-        loginPage.enterSignUpForm("test@email.test", "Test User");
+        loginPage.enterSignUpForm("test@email1.test", "Test User");
         registrationPage.fillTheRegistrationFrom("Mr",
                 "P@ssowrd",
                 "15",
                 "September",
-                "2026",
+                "2021",
                 "TestName",
                 "TestLastName",
                 "Test address",
-                "Latvia",
+                "India",
                 "Test state",
                 "Test City",
                 "2312",
                 "312312312123");
 
-        accountCreatedPage.validateTitle("Account Created!");
+        accountCreatedPage.validateTitle("ACCOUNT CREATED!");
     }
 }
